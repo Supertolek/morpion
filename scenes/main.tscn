@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjxhuqep8ibhs"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_crdxf"]
+[ext_resource type="PackedScene" uid="uid://58gdvsg73d6q" path="res://scenes/grid.tscn" id="1_k3ssq"]
+[ext_resource type="Shader" path="res://scripts/shaders/blur.gdshader" id="2_i4yoy"]
+[ext_resource type="Script" path="res://scripts/shader_resize.gd" id="3_ueq3w"]
+[ext_resource type="PackedScene" uid="uid://c5a5phrrgdutu" path="res://scenes/click_detection.tscn" id="4_5mfcq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rptxf"]
+shader = ExtResource("2_i4yoy")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_crdxf")
+
+[node name="Grid" parent="." instance=ExtResource("1_k3ssq")]
+scale = Vector2(3, 3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+visible = false
+material = SubResource("ShaderMaterial_rptxf")
+offset_left = -671.0
+offset_top = -312.5
+offset_right = 671.0
+offset_bottom = 312.5
+script = ExtResource("3_ueq3w")
+
+[node name="ClickDetectionNodes" type="Node2D" parent="."]
+
+[node name="ClickDetectionTL" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(-330, -330)
+
+[node name="ClickDetectionTM" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(0, -330)
+
+[node name="ClickDetectionTR" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(330, -330)
+
+[node name="ClickDetectionML" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(-330, 0)
+
+[node name="ClickDetectionMM" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+
+[node name="ClickDetectionMR" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(330, 0)
+
+[node name="ClickDetectionBL" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(-330, 330)
+
+[node name="ClickDetectionBM" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(0, 330)
+
+[node name="ClickDetectionBR" parent="ClickDetectionNodes" instance=ExtResource("4_5mfcq")]
+position = Vector2(330, 330)
